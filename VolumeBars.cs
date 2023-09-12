@@ -106,7 +106,7 @@ namespace QtIndicators
                 }
             }
 
-            if (ColorChurnVolumeBars && (IsOneDayChurnBar(barIndex) || IsTwoDayChurnBar(barIndex)))
+            if (ColorChurnVolumeBars && (IsOneBarChurnBar(barIndex) || IsTwoBarChurnBar(barIndex)))
             {
                 var color = IsUpCandle() ? ChurnBarColor.Color1 : ChurnBarColor.Color2;
                 _lineSeries.SetMarker(0, color);
@@ -119,7 +119,7 @@ namespace QtIndicators
             _lineSeries.SetMarker(0, _lineSeries.Color);
         }
 
-        private bool IsTwoDayChurnBar(int barIndex)
+        private bool IsTwoBarChurnBar(int barIndex)
         {
             var periodRange = GetHighestHigh(barIndex, 2) - GetLowestLow(barIndex, 2);
             var twoDayVolume = Volume() + GetItem(barIndex + 1, PriceType.Volume);
@@ -150,7 +150,7 @@ namespace QtIndicators
             return HistoricalData[barIndex][priceType];
         }
 
-        private bool IsOneDayChurnBar(int barIndex)
+        private bool IsOneBarChurnBar(int barIndex)
         {
             var volume = Volume();
             var high = High();
